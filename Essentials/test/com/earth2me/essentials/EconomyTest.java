@@ -69,7 +69,9 @@ public class EconomyTest extends TestCase {
         }
 
         //test Format
-        assertEquals("Format $1000", "$1000", Economy.format(1000.0));
+        
+        assertEquals("Format $12,345,678.90", "$12,345,678.90", Economy.format(12345678.90));
+        assertEquals("Format $1,000", "$1,000", Economy.format(1000.0));
         assertEquals("Format $10", "$10", Economy.format(10.0));
         assertEquals("Format $10.10", "$10.10", Economy.format(10.10));
         assertEquals("Format $10.10", "$10.10", Economy.format(10.1000001));
