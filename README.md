@@ -1,3 +1,9 @@
+Fork information
+--------
+All of the changes I have performed are listed [here](https://github.com/HunterGPlays/Essentials/wiki/ForkChanges).
+
+Original EssentialsX README.md
+--------
 ![](https://i.imgur.com/mwJjTRw.png)
 
 [![Downloads](http://i.imgur.com/MNr6OTb.png)](https://ci.drtshock.net/job/EssentialsX)
