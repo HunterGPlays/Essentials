@@ -270,20 +270,22 @@ public class EssentialsPlayerListener implements Listener {
                     }
                 }
 
-                if (user.isAuthorized("essentials.fly.safelogin")) {
+                if (user.isAuthorized("essentials.fly.safelogin") || user.isAuthorized("essentials.fly.onlogin")) {
+                    // Checks for onlogin.
+                    if (user.isAuthorized("essentials.fly.onlogin")) {
+                        user.getBase().setFallDistance(0);
+                        user.getBase().setAllowFlight(true);
+                        user.getBase().setFlying(true);
+                        user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
+                        return;
+                    }
+                    // Continues with safelogin stuff if onlogin perm worked.
                     user.getBase().setFallDistance(0);
                     if (LocationUtil.shouldFly(user.getLocation())) {
                         user.getBase().setAllowFlight(true);
                         user.getBase().setFlying(true);
                         user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
                     }
-                }
-                
-                if (user.isAuthorized("essentials.fly.onlogin")) {
-                    user.getBase().setFallDistance(0);
-                    user.getBase().setAllowFlight(true);
-                    user.getBase().setFlying(true);
-                    user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
                 }
 
                 if (!user.isAuthorized("essentials.speed")) {
