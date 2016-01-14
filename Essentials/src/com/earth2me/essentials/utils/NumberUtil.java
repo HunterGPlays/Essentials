@@ -13,10 +13,11 @@ import static com.earth2me.essentials.I18n.tl;
 
 public class NumberUtil {
     static DecimalFormat twoDPlaces = new DecimalFormat("#,###.##");
-    static DecimalFormat currencyFormat = new DecimalFormat("#,##0.00", DecimalFormatSymbols.getInstance(Locale.US));
+    static DecimalFormat currencyFormat = new DecimalFormat("#0.00", DecimalFormatSymbols.getInstance(Locale.US));
+    static DecimalFormat commaSeparatedCurrencyFormat = new DecimalFormat("#,##0.00", DecimalFormatSymbols.getInstance(Locale.US));
 
     public static String shortCurrency(final BigDecimal value, final IEssentials ess) {
-        return ess.getSettings().getCurrencySymbol() + formatAsCurrency(value);
+        return ess.getSettings().getCurrencySymbol() + formatAsCurrency(value, ess);
     }
 
     public static String formatDouble(final double value) {
@@ -24,17 +25,27 @@ public class NumberUtil {
         return twoDPlaces.format(value);
     }
 
-    public static String formatAsCurrency(final BigDecimal value) {
-        currencyFormat.setRoundingMode(RoundingMode.FLOOR);
-        String str = currencyFormat.format(value);
-        if (str.endsWith(".00")) {
-            str = str.substring(0, str.length() - 3);
+    public static String formatAsCurrency(final BigDecimal value, final IEssentials ess) {
+        if (ess.getSettings().isCommaSeparatedMoney()) {
+            commaSeparatedCurrencyFormat.setRoundingMode(RoundingMode.FLOOR);
+            String str = commaSeparatedCurrencyFormat.format(value);
+            if (str.endsWith(".00")) {
+                str = str.substring(0, str.length() - 3);
+            }
+            return str;
         }
-        return str;
+        else {
+            currencyFormat.setRoundingMode(RoundingMode.FLOOR);
+            String str = currencyFormat.format(value);
+            if (str.endsWith(".00")) {
+                str = str.substring(0, str.length() - 3);
+            }
+            return str;
+        }
     }
 
     public static String displayCurrency(final BigDecimal value, final IEssentials ess) {
-        return tl("currency", ess.getSettings().getCurrencySymbol(), formatAsCurrency(value));
+        return tl("currency", ess.getSettings().getCurrencySymbol(), formatAsCurrency(value, ess));
     }
 
     public static String displayCurrencyExactly(final BigDecimal value, final IEssentials ess) {

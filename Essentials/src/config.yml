@@ -547,6 +547,10 @@ minimum-pay-amount: 0.001
 # Default is 180 (3 minutes)
 last-message-reply-recipient-timeout: 180
 
+# Make money more fancy by separating it with commas. This makes it easier to read.
+# It'd make $12345678.90 appear as $12,345,678.90
+comma-separated-money: true
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                   EssentialsHelp                     | #
