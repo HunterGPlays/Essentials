@@ -28,6 +28,8 @@ public class NumberUtil {
     public static String formatAsCurrency(final BigDecimal value, final IEssentials ess) {
         if (ess.getSettings().isCommaSeparatedMoney()) {
             commaSeparatedCurrencyFormat.setRoundingMode(RoundingMode.FLOOR);
+            commaSeparatedCurrencyFormat.setMinimumFractionDigits(2);
+            commaSeparatedCurrencyFormat.setMaximumFractionDigits(2);
             String str = commaSeparatedCurrencyFormat.format(value);
             if (str.endsWith(".00")) {
                 str = str.substring(0, str.length() - 3);
@@ -36,6 +38,8 @@ public class NumberUtil {
         }
         else {
             currencyFormat.setRoundingMode(RoundingMode.FLOOR);
+            currencyFormat.setMinimumFractionDigits(2);
+            currencyFormat.setMaximumFractionDigits(2);
             String str = currencyFormat.format(value);
             if (str.endsWith(".00")) {
                 str = str.substring(0, str.length() - 3);
