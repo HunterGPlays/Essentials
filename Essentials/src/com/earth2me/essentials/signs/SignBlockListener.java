@@ -46,7 +46,9 @@ public class SignBlockListener implements Listener {
     public boolean protectSignsAndBlocks(final Block block, final Player player) throws MaxMoneyException {
         // prevent any signs be broken by destroying the block they are attached to
         if (EssentialsSign.checkIfBlockBreaksSigns(block)) {
-            LOGGER.log(Level.INFO, "Prevented that a block was broken next to a sign.");
+            if (ess.getSettings().isDebug()) {
+                LOGGER.log(Level.INFO, "Prevented that a block was broken next to a sign.");
+            }
             return true;
         }
 
@@ -82,12 +84,19 @@ public class SignBlockListener implements Listener {
             event.setLine(i, FormatUtil.formatString(user, "essentials.signs", event.getLine(i)));
         }
 
-        final String topLine = event.getLine(0);
+        final String lColorlessTopLine = ChatColor.stripColor(event.getLine(0)).toLowerCase().trim();
+        if (lColorlessTopLine.isEmpty()) {
+            return;
+        }
         //We loop through all sign types here to prevent clashes with preexisting signs later
         for (Signs signs : Signs.values()) {
             final EssentialsSign sign = signs.getSign();
-            if (topLine.endsWith(sign.getSuccessName()) && ChatColor.stripColor(topLine).equalsIgnoreCase(ChatColor.stripColor(sign.getSuccessName()))) {
-                event.setLine(0, ChatColor.stripColor(topLine));
+            // If the top line contains any of the success name (excluding colors), just remove all colours from the first line.
+            // This is to ensure we are only modifying possible Essentials Sign and not just removing colors from the first line of all signs.
+            // Top line and sign#getSuccessName() are both lowercased since contains is case-sensitive.
+            String lSuccessName = ChatColor.stripColor(sign.getSuccessName().toLowerCase());
+            if (lColorlessTopLine.contains(lSuccessName)) {
+                event.setLine(0, lColorlessTopLine);
             }
         }
     }
