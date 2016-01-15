@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import static com.earth2me.essentials.I18n.tl;
@@ -14,7 +15,7 @@ import static com.earth2me.essentials.I18n.tl;
 public class NumberUtil {
     static DecimalFormat twoDPlaces = new DecimalFormat("#,###.##");
     static DecimalFormat currencyFormat = new DecimalFormat("#0.00", DecimalFormatSymbols.getInstance(Locale.US));
-    static DecimalFormat commaSeparatedCurrencyFormat = new DecimalFormat("#,##0.00", DecimalFormatSymbols.getInstance(Locale.US));
+    static final NumberFormat commaSeparatedCurrencyFormat = NumberFormat.getInstance(Locale.US);
 
     public static String shortCurrency(final BigDecimal value, final IEssentials ess) {
         return ess.getSettings().getCurrencySymbol() + formatAsCurrency(value, ess);
@@ -28,6 +29,7 @@ public class NumberUtil {
     public static String formatAsCurrency(final BigDecimal value, final IEssentials ess) {
         if (ess.getSettings().isCommaSeparatedMoney()) {
             commaSeparatedCurrencyFormat.setRoundingMode(RoundingMode.FLOOR);
+            commaSeparatedCurrencyFormat.setGroupingUsed(true);
             commaSeparatedCurrencyFormat.setMinimumFractionDigits(2);
             commaSeparatedCurrencyFormat.setMaximumFractionDigits(2);
             String str = commaSeparatedCurrencyFormat.format(value);
