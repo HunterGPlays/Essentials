@@ -47,11 +47,6 @@ public class Commandseen extends EssentialsCommand {
         }catch (IllegalArgumentException ignored) { // Thrown if invalid UUID from string, check by name.
             player = ess.getOfflineUser(args[0]);
         }
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> refs/remotes/drtshock/2.x
         if (player == null) {
             if (ipLookup && FormatUtil.validIP(args[0])) {
                 seenIP(server, sender, args[0]);
