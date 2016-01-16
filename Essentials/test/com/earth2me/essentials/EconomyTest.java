@@ -69,7 +69,10 @@ public class EconomyTest extends TestCase {
         }
 
         //test Format
+<<<<<<< HEAD
         
+=======
+>>>>>>> refs/remotes/drtshock/2.x
         assertEquals("Format $1,000", "$1,000", Economy.format(1000.0));
         assertEquals("Format $10", "$10", Economy.format(10.0));
         assertEquals("Format $10.10", "$10.10", Economy.format(10.10));
