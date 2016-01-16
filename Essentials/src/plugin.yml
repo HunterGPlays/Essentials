@@ -303,6 +303,10 @@ commands:
     description: Quickly reply to the last player to message you.
     usage: /<command> <message>
     aliases: [er,reply,ereply]
+  rawbroadcast:
+    description: Broadcasts a message to the entire server without a prefix.
+    usage: /<command> <msg>
+    aliases: [rawbc,erawbroadcast,erawbc]
   realname:
     description: Displays the username of a user based on nick.
     usage: /<command> <nickname>
