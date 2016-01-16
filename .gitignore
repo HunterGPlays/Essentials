@@ -47,3 +47,8 @@ dependency-reduced-pom.xml
 /Essentials/usermap.csv
 /Essentials/userdata
 /EssentialsGroupManager/
+.settings/
+.classpath
+.project
+spigot-*.jar
+craftbukkit-*.jar
