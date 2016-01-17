@@ -1139,4 +1139,8 @@ public class Settings implements net.ess3.api.ISettings {
     @Override public boolean isCommaSeparatedMoney() {
         return config.getBoolean("comma-separated-money", true);
     }
+    
+    @Override public boolean isCompilexMode() {
+        return config.getBoolean("compilex-mode", false);
+    }
 }

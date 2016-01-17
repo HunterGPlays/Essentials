@@ -30,10 +30,13 @@ public class Commandgc extends EssentialsCommand {
         }
 
         sender.sendMessage(tl("uptime", DateUtil.formatDateDiff(ManagementFactory.getRuntimeMXBean().getStartTime())));
-        sender.sendMessage(tl("tps", "" + color + NumberUtil.formatDouble(tps)));
-        sender.sendMessage(tl("gcmax", (Runtime.getRuntime().maxMemory() / 1024 / 1024)));
+        if (ess.getSettings().isCompilexMode()) {
+            sender.sendMessage(tl("tps", "" + color + NumberUtil.formatDouble(tps * 2)));
+        }
+        else sender.sendMessage(tl("tps", "" + color + NumberUtil.formatDouble(tps)));
+        sender.sendMessage(tl("gcused", (Runtime.getRuntime().maxMemory() / 1024 / 1024) - (Runtime.getRuntime().freeMemory() / 1024 / 1024), (Runtime.getRuntime().freeMemory() / 1024 / 1024)));
         sender.sendMessage(tl("gctotal", (Runtime.getRuntime().totalMemory() / 1024 / 1024)));
-        sender.sendMessage(tl("gcfree", (Runtime.getRuntime().freeMemory() / 1024 / 1024)));
+        sender.sendMessage(tl("gcmax", (Runtime.getRuntime().maxMemory() / 1024 / 1024)));
 
         List<World> worlds = server.getWorlds();
         for (World w : worlds) {

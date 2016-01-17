@@ -463,6 +463,9 @@ last-message-reply-recipient: true
 # Toggles whether or not right clicking mobs with a milk bucket turns them into a baby.
 milk-bucket-easter-egg: true
 
+# Become the new Compilex! They multiply the output of the server TPS command by 2 to make their clients think that they are l33t optimizers with a special combat TPS and such.
+compilex-mode: false
+
 ############################################################
 # +------------------------------------------------------+ #
 # |                   EssentialsHome                     | #
