@@ -28,12 +28,7 @@ public class Commandping extends EssentialsCommand {
             int ping = getPing(sender.getPlayer(), server);
             sender.sendMessage(tl("ping", "" + getPingColor(ping) + ping));
         } else {
-            final User user = getPlayer(server, args, 0, true, true);;
-            //if (!player.isOnline()) {
-            //    sender.sendMessage(tl("errorWithMessage", player + "is not online."));
-            //    return;
-            //}
-
+            final User user = getPlayer(server, args, 0, true, true);
             int ping = getPing((Player) user, server);
             sender.sendMessage(tl("pingOfPlayer", user.getDisplayName(), "" + getPingColor(ping) + ping));
         }
