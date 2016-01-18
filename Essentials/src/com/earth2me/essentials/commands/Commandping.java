@@ -29,7 +29,8 @@ public class Commandping extends EssentialsCommand {
             sender.sendMessage(tl("ping", "" + getPingColor(ping) + ping));
         } else {
             final User user = getPlayer(server, args, 0, true, true);
-            int ping = getPing((Player) user, server);
+            final Player player = user.getBase();
+            int ping = getPing(player, server);
             sender.sendMessage(tl("pingOfPlayer", user.getDisplayName(), "" + getPingColor(ping) + ping));
         }
     }
