@@ -50,10 +50,12 @@ public class Commandping extends EssentialsCommand {
         ChatColor color;
         if (ping <= 200) {
             color = ChatColor.GREEN;
-        } else if (ping <= 500) {
+        } else if (ping <= 400) {
             color = ChatColor.YELLOW;
-        } else {
+        } else if (ping <= 600) {
             color = ChatColor.RED;
+        } else {
+            color = ChatColor.DARK_RED;
         }
         return color;
     }
