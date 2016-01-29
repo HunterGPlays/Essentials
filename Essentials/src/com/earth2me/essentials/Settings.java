@@ -495,6 +495,8 @@ public class Settings implements net.ess3.api.ISettings {
         cancelAfkOnInteract = _cancelAfkOnInteract();
         cancelAfkOnMove = _cancelAfkOnMove() && cancelAfkOnInteract;
         getFreezeAfkPlayers = _getFreezeAfkPlayers();
+        afkListName = _getAfkListName();
+        isAfkListName = !afkListName.equalsIgnoreCase("none");
         itemSpawnBl = _getItemSpawnBlacklist();
         loginAttackDelay = _getLoginAttackDelay();
         signUsePerSecond = _getSignUsePerSecond();
@@ -862,6 +864,23 @@ public class Settings implements net.ess3.api.ISettings {
         return config.getBoolean("cancel-afk-on-interact", true);
     }
 
+    private String afkListName;
+    private boolean isAfkListName;
+
+    public String _getAfkListName() {
+        return FormatUtil.replaceFormat(config.getString("afk-list-name", "none"));
+    }
+
+    @Override
+    public boolean isAfkListName() {
+        return isAfkListName;
+    }
+
+    @Override
+    public String getAfkListName() {
+        return afkListName;
+    }
+
     @Override
     public boolean areDeathMessagesEnabled() {
         return config.getBoolean("death-messages", true);
@@ -1135,12 +1154,21 @@ public class Settings implements net.ess3.api.ISettings {
     @Override public boolean isMilkBucketEasterEggEnabled() {
         return config.getBoolean("milk-bucket-easter-egg", true);
     }
-    
+
     @Override public boolean isCommaSeparatedMoney() {
         return config.getBoolean("comma-separated-money", true);
     }
     
     @Override public boolean isCompilexMode() {
         return config.getBoolean("compilex-mode", false);
+    }
+
+    @Override public boolean isSendFlyEnableOnJoin() {
+        return config.getBoolean("send-fly-enable-on-join", true);
+    }
+
+    @Override
+    public boolean isWorldTimePermissions() {
+        return config.getBoolean("world-time-permissions", false);
     }
 }

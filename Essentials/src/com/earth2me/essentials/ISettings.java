@@ -160,6 +160,10 @@ public interface ISettings extends IConf {
 
     boolean cancelAfkOnInteract();
 
+    boolean isAfkListName();
+
+    String getAfkListName();
+
     boolean areDeathMessagesEnabled();
 
     void setDebug(boolean debug);
@@ -239,4 +243,8 @@ public interface ISettings extends IConf {
     boolean isCommaSeparatedMoney();
     
     boolean isCompilexMode();
+
+    boolean isSendFlyEnableOnJoin();
+    
+    boolean isWorldTimePermissions();
 }

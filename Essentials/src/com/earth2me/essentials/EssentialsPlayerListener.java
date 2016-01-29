@@ -277,7 +277,9 @@ public class EssentialsPlayerListener implements Listener {
                         user.getBase().setFallDistance(0);
                         user.getBase().setAllowFlight(true);
                         user.getBase().setFlying(true);
-                        user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
+                        if (ess.getSettings().isSendFlyEnableOnJoin()) {
+                            user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
+                        }
                         return;
                     }
                     // Continues with safelogin stuff if onlogin perm worked.
@@ -285,7 +287,9 @@ public class EssentialsPlayerListener implements Listener {
                     if (LocationUtil.shouldFly(user.getLocation())) {
                         user.getBase().setAllowFlight(true);
                         user.getBase().setFlying(true);
-                        user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
+                        if (ess.getSettings().isSendFlyEnableOnJoin()) {
+                            user.getBase().sendMessage(tl("flyMode", tl("enabled"), user.getDisplayName()));
+                        }
                     }
                 }
 

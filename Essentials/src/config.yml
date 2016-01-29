@@ -391,6 +391,11 @@ cancel-afk-on-interact: true
 # Disable this to reduce server lag.
 cancel-afk-on-move: true
 
+# Set the player's list name when they are AFK. This is none by default which specifies that Essentials 
+# should not interfere with the AFK player's list name.
+# You may use color codes, use {USERNAME} the player's name or {PLAYER} for the player's displayname.
+afk-list-name: none
+
 # You can disable the death messages of Minecraft here.
 death-messages: true
 
@@ -460,11 +465,24 @@ max-tempban-time: -1
 # If false, /r goes to the last person that messaged you.
 last-message-reply-recipient: true
 
+# If last-message-reply-recipient is true, this specifies the duration, in seconds, that would need to elapse for the 
+# reply-recipient to update when receiving a message.
+# Default is 180 (3 minutes)
+last-message-reply-recipient-timeout: 180
+
 # Toggles whether or not right clicking mobs with a milk bucket turns them into a baby.
 milk-bucket-easter-egg: true
 
 # Become the new Compilex! They multiply the output of the server TPS command by 2 to make their clients think that they are l33t optimizers with a special combat TPS and such.
 compilex-mode: false
+
+# Toggles whether or not the fly status message should be sent to players on join
+send-fly-enable-on-join: true
+
+# Set to true to enable per-world permissions for setting time for individual worlds with essentials commands.
+# This applies to /time, /day, /eday, /night, /enight, /etime.
+# Give someone permission to teleport to a world with essentials.time.world.<worldname>.
+world-time-permissions: false
 
 ############################################################
 # +------------------------------------------------------+ #
@@ -544,11 +562,6 @@ use-bukkit-permissions: false
 
 # Minimum acceptable amount to be used in /pay.
 minimum-pay-amount: 0.001
-
-# If last-message-reply-recipient is true, this specifies the duration, in seconds, that would need to elapse for the 
-# reply-recipient to update when receiving a message.
-# Default is 180 (3 minutes)
-last-message-reply-recipient-timeout: 180
 
 # Make money more fancy by separating it with commas. This makes it easier to read.
 # It'd make $12345678.90 appear as $12,345,678.90

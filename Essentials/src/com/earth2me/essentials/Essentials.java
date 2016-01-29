@@ -18,7 +18,7 @@
 package com.earth2me.essentials;
 
 import com.earth2me.essentials.commands.*;
-import com.earth2me.essentials.metrics.MetricsLite;
+import com.earth2me.essentials.metrics.Metrics;
 import com.earth2me.essentials.perm.PermissionsHandler;
 import com.earth2me.essentials.register.payment.Methods;
 import com.earth2me.essentials.signs.SignBlockListener;
@@ -90,7 +90,7 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     private transient UserMap userMap;
     private transient ExecuteTimer execTimer;
     private transient I18n i18n;
-    private transient MetricsLite metrics;
+    private transient Metrics metrics;
     private transient EssentialsTimer timer;
     private final transient List<String> vanishedPlayers = new ArrayList<>();
     private transient Method oldGetOnlinePlayers;
@@ -153,13 +153,7 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
             execTimer.mark("I18n1");
             
             Console.setInstance(this);
-            
-            String serverString = Bukkit.getServer().getClass().getName();
-            for (int i = 1; i <= 7; i++) {
-                if (serverString.contains(".v1_" + i + "_R")) {
-                    throw new Error("Outdated server. This version of Essentials will only work on Bukkit 1.8 or higher.");
-                }
-            }
+
             final PluginManager pm = getServer().getPluginManager();
             for (Plugin plugin : pm.getPlugins()) {
                 if (plugin.getDescription().getName().startsWith("Essentials") && !plugin.getDescription().getVersion().equals(this.getDescription().getVersion()) && !plugin.getDescription().getName().equals("EssentialsAntiCheat")) {
@@ -222,7 +216,7 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
             execTimer.mark("RegHandler");
 
             try {
-                metrics = new MetricsLite(this);
+                metrics = new Metrics(this);
                 if (!metrics.isOptOut()) {
                     getLogger().info("Starting Metrics. Opt-out using the global PluginMetrics config.");
                     new BukkitRunnable() {
@@ -517,12 +511,12 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     }
 
     @Override
-    public MetricsLite getMetrics() {
+    public Metrics getMetrics() {
         return metrics;
     }
 
     @Override
-    public void setMetrics(MetricsLite metrics) {
+    public void setMetrics(Metrics metrics) {
         this.metrics = metrics;
     }
 
