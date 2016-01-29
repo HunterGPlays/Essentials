@@ -639,7 +639,6 @@ public class Metrics {
         return URLEncoder.encode(text, "UTF-8");
     }
 
-<<<<<<< HEAD:Essentials/src/com/earth2me/essentials/metrics/Metrics.java
     /**
      * Represents a custom graph on the website
      */
@@ -784,6 +783,3 @@ public class Metrics {
         }
     }
 }
-=======
-}
->>>>>>> origin/2.x:Essentials/src/com/earth2me/essentials/metrics/Metrics.java
