@@ -19,6 +19,7 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
@@ -89,6 +90,10 @@ public class MetaItemStack {
         validPotionPower = false;
         isSplashPotion = false;
         completePotion = true;
+    }
+
+    private boolean isPotion(Material type) {
+        return type.name().endsWith("POTION");
     }
 
     public boolean canSpawn(final IEssentials ess) {
@@ -167,6 +172,8 @@ public class MetaItemStack {
             final ItemMeta meta = stack.getItemMeta();
             meta.setLore(lore);
             stack.setItemMeta(meta);
+        } else if (split.length > 1 && (split[0].equalsIgnoreCase("unbreakable") && hasMetaPermission(sender, "unbreakable", false, true, ess))) {
+            setUnbreakable(stack, Boolean.valueOf(split[1]));
         } else if (split.length > 1 && (split[0].equalsIgnoreCase("player") || split[0].equalsIgnoreCase("owner")) && stack.getType() == Material.SKULL_ITEM && hasMetaPermission(sender, "head", false, true, ess)) {
             if (stack.getDurability() == 3) {
                 final String owner = split[1];
@@ -201,7 +208,7 @@ public class MetaItemStack {
             stack.setItemMeta(meta);
         } else if (stack.getType() == Material.FIREWORK) {//WARNING - Meta for fireworks will be ignored after this point.
             addFireworkMeta(sender, false, string, ess);
-        } else if (stack.getType() == Material.POTION) { //WARNING - Meta for potions will be ignored after this point.
+        } else if (isPotion(stack.getType())) { //WARNING - Meta for potions will be ignored after this point.
             addPotionMeta(sender, false, string, ess);
         } else if (banner != null && stack.getType() == banner) { //WARNING - Meta for banners will be ignored after this point.
             addBannerMeta(sender, false, string, ess);
@@ -307,7 +314,7 @@ public class MetaItemStack {
     }
 
     public void addPotionMeta(final CommandSource sender, final boolean allowShortName, final String string, final IEssentials ess) throws Exception {
-        if (stack.getType() == Material.POTION) {
+        if (isPotion(stack.getType())) {
             final String[] split = splitPattern.split(string, 2);
 
             if (split.length < 2) {
@@ -465,6 +472,28 @@ public class MetaItemStack {
             return false;
         } else {
             throw new Exception(tl("noMetaPerm", metaPerm));
+        }
+    }
+
+    private static Method spigotMethod;
+    private static Method setUnbreakableMethod;
+
+    private void setUnbreakable(ItemStack is, boolean unbreakable) {
+        ItemMeta meta = is.getItemMeta();
+        try {
+            if (spigotMethod == null) {
+                spigotMethod = meta.getClass().getDeclaredMethod("spigot");
+                spigotMethod.setAccessible(true);
+            }
+            Object itemStackSpigot = spigotMethod.invoke(meta);
+            if (setUnbreakableMethod == null) {
+                setUnbreakableMethod = itemStackSpigot.getClass().getDeclaredMethod("setUnbreakable", Boolean.TYPE);
+                setUnbreakableMethod.setAccessible(true);
+            }
+            setUnbreakableMethod.invoke(itemStackSpigot, unbreakable);
+            is.setItemMeta(meta);
+        } catch (Throwable t) {
+            t.printStackTrace();
         }
     }
 }

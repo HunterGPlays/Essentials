@@ -1,6 +1,8 @@
 package com.earth2me.essentials;
 
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -96,21 +98,6 @@ public class OfflinePlayer implements Player {
 
     @Override
     public void setHealth(double d) {
-    }
-
-    @Override
-    public Egg throwEgg() {
-        return null;
-    }
-
-    @Override
-    public Snowball throwSnowball() {
-        return null;
-    }
-
-    @Override
-    public Arrow shootArrow() {
-        return null;
     }
 
     @Override
@@ -902,6 +889,11 @@ public class OfflinePlayer implements Player {
     }
 
     @Override
+    public InventoryView openMerchant(Villager villager, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void closeInventory() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -1022,6 +1014,11 @@ public class OfflinePlayer implements Player {
     }
 
     @Override
+    public MainHand getMainHand() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void playSound(Location arg0, Sound arg1, float arg2, float arg3) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -1099,6 +1096,26 @@ public class OfflinePlayer implements Player {
     @Override
     public boolean isCustomNameVisible() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setGlowing(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isGlowing() {
+        return false;
+    }
+
+    @Override
+    public void setInvulnerable(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isInvulnerable() {
+        return false;
     }
 
     @Override
@@ -1217,6 +1234,36 @@ public class OfflinePlayer implements Player {
     }
 
     @Override
+    public boolean isGliding() {
+        return false;
+    }
+
+    @Override
+    public void setGliding(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setAI(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean hasAI() {
+        return false;
+    }
+
+    @Override
+    public void setCollidable(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean isCollidable() {
+        return false;
+    }
+
+    @Override
     public <T extends Projectile> T launchProjectile(Class<? extends T> type, Vector vector) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -1322,7 +1369,72 @@ public class OfflinePlayer implements Player {
     }
 
     @Override
+    public void spawnParticle(Particle particle, Location location, int i) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, T t) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, T t) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, T t) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, T t) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, double v3) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, double v6) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, double v3, T t) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, double v6, T t) {
+
+    }
+
+    @Override
     public void sendTitle(String title, String subtitle) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public AttributeInstance getAttribute(Attribute attribute) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

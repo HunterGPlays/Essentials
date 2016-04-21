@@ -6,6 +6,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,35 +32,71 @@ public final class InventoryWorkaround {
         return -1;
     }
 
-    // Returns what it couldnt store
+    /*
+    Spigot 1.9, for whatever reason, decided to merge the armor and main player inventories without providing a way
+    to access the main inventory. There's lots of ugly code in here to work around that.
+     */
+    private static final int USABLE_PLAYER_INV_SIZE = 36;
+
+    private static boolean isCombinedInventory(Inventory inventory) {
+        return inventory instanceof PlayerInventory && inventory.getContents().length > USABLE_PLAYER_INV_SIZE;
+    }
+
+    // Clears inventory without clearing armor
+    public static void clearInventoryNoArmor(PlayerInventory inventory) {
+        if (isCombinedInventory(inventory)) {
+            for (int i = 0; i < USABLE_PLAYER_INV_SIZE; i++) {
+                inventory.setItem(i, null);
+            }
+        } else {
+            inventory.clear();
+        }
+    }
+
+    private static Inventory makeTruncatedPlayerInventory(PlayerInventory playerInventory) {
+        Inventory fakeInventory = Bukkit.getServer().createInventory(null, USABLE_PLAYER_INV_SIZE);
+        fakeInventory.setContents(Arrays.copyOf(playerInventory.getContents(), fakeInventory.getSize()));
+        return fakeInventory;
+    }
+
+    // Returns what it couldn't store
     // This will will abort if it couldn't store all items
     public static Map<Integer, ItemStack> addAllItems(final Inventory inventory, final ItemStack... items) {
-        final Inventory fakeInventory = Bukkit.getServer().createInventory(null, inventory.getType());
         ItemStack[] contents = inventory.getContents();
-        try {
+
+        final Inventory fakeInventory;
+        if (isCombinedInventory(inventory)) {
+            fakeInventory = makeTruncatedPlayerInventory((PlayerInventory) inventory);
+        } else {
+            fakeInventory = Bukkit.getServer().createInventory(null, inventory.getType());
             fakeInventory.setContents(contents);
-        } catch (IllegalArgumentException e) {
-            ItemStack[] truncatedContents = new ItemStack[fakeInventory.getSize()];
-            System.arraycopy(contents, 0, truncatedContents, 0, truncatedContents.length);
-            fakeInventory.setContents(truncatedContents);
         }
-        Map<Integer, ItemStack> overFlow = addItems(fakeInventory, items);
-        if (overFlow.isEmpty()) {
+        Map<Integer, ItemStack> overflow = addItems(fakeInventory, items);
+        if (overflow.isEmpty()) {
             addItems(inventory, items);
             return null;
         }
         return addItems(fakeInventory, items);
     }
 
-    // Returns what it couldnt store
+    // Returns what it couldn't store
     public static Map<Integer, ItemStack> addItems(final Inventory inventory, final ItemStack... items) {
         return addOversizedItems(inventory, 0, items);
     }
 
-    // Returns what it couldnt store
+    // Returns what it couldn't store
     // Set oversizedStack to below normal stack size to disable oversized stacks
     public static Map<Integer, ItemStack> addOversizedItems(final Inventory inventory, final int oversizedStacks, final ItemStack... items) {
-        final Map<Integer, ItemStack> leftover = new HashMap<Integer, ItemStack>();
+        if (isCombinedInventory(inventory)) {
+            Inventory fakeInventory = makeTruncatedPlayerInventory((PlayerInventory) inventory);
+            Map<Integer, ItemStack> overflow = addOversizedItems(fakeInventory, oversizedStacks, items);
+            for (int i = 0; i < fakeInventory.getContents().length; i++) {
+                inventory.setItem(i, fakeInventory.getContents()[i]);
+            }
+            return overflow;
+        }
+
+        final Map<Integer, ItemStack> leftover = new HashMap<>();
 
 		/*
          * TODO: some optimization - Create a 'firstPartial' with a 'fromIndex' - Record the lastPartial per Material -

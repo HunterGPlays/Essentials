@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>BlockMetaProvider</artifactId>
+    <artifactId>1_9_R1Provider</artifactId>
 
     <repositories>
         <repository>
@@ -20,6 +20,12 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>craftbukkit</artifactId>
+            <version>1.9-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>net.ess3</groupId>
             <artifactId>NMSProvider</artifactId>

@@ -17,7 +17,7 @@ The official upstream repository is at https://github.com/Essentials/Essentials
 Why you should use it
 --------
 
-EssentialsX provides several performance enhancements and fixes that are currently not available in Essentials and Spigot-Essentials, most importantly fixed mob spawner support for 1.8+ servers. It also retains compatibility for Minecraft 1.7.10. [See the wiki for details.](https://github.com/drtshock/Essentials/wiki)
+EssentialsX provides several performance enhancements and fixes that are currently not available in Essentials and Spigot-Essentials, most notably mob spawner support for 1.8+ servers and buy/trade sign support for 1.9+ servers. It also retains compatibility for Minecraft 1.7.10. [See the wiki for details.](https://github.com/drtshock/Essentials/wiki)
 
 EssentialsX is almost a completely drop-in replacement for Essentials. However, it has different requirements:
 
@@ -35,7 +35,7 @@ Because EssentialsX builds against the Spigot/CraftBukkit server software for le
 ```
 java -jar BuildTools.jar --rev 1.8
 java -jar BuildTools.jar --rev 1.8.3
-java -jar BuildTools.jar
+java -jar BuildTools.jar --rev 1.9
 ```
 
 Then, to build with Maven, use the command

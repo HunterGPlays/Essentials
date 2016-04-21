@@ -52,3 +52,4 @@ dependency-reduced-pom.xml
 .project
 spigot-*.jar
 craftbukkit-*.jar
+/EssentialsGroupManager/target/

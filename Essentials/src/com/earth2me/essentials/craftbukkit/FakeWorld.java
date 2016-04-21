@@ -153,17 +153,17 @@ public class FakeWorld implements World {
     }
 
     @Override
+    public <T extends Arrow> T spawnArrow(Location location, Vector vector, float v, float v1, Class<T> aClass) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public boolean generateTree(Location lctn, TreeType tt) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean generateTree(Location lctn, TreeType tt, BlockChangeDelegate bcd) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public LivingEntity spawnCreature(Location lctn, CreatureType ct) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -493,11 +493,6 @@ public class FakeWorld implements World {
     }
 
     @Override
-    public LivingEntity spawnCreature(Location arg0, EntityType arg1) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public <T> void playEffect(Location lctn, Effect effect, T t) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -588,6 +583,11 @@ public class FakeWorld implements World {
     }
 
     @Override
+    public void playSound(Location location, String s, float v, float v1) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public int getAmbientSpawnLimit() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -625,6 +625,66 @@ public class FakeWorld implements World {
     @Override
     public WorldBorder getWorldBorder() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, Location location, int i) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, T t) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, T t) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, T t) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, T t) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, double v3) {
+
+    }
+
+    @Override
+    public void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, double v6) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, Location location, int i, double v, double v1, double v2, double v3, T t) {
+
+    }
+
+    @Override
+    public <T> void spawnParticle(Particle particle, double v, double v1, double v2, int i, double v3, double v4, double v5, double v6, T t) {
+
     }
 
     @Override
